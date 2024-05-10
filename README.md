@@ -1,2 +1,2 @@
 # DEA GROUP PROJECT
- A web site to keep your pets more healthy
+A web site to choose your lap top
