@@ -22,7 +22,7 @@ import javax.servlet.http.Part;
 
 /**
  *
- * @author wwwkr
+ * @author krishantha
  */
 @WebServlet(name = "LapAddServlet", urlPatterns = {"/LapAddServlet"})
 @MultipartConfig
