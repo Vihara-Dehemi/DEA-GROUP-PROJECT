@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author wwwkr
+ * @author Prabhath
  */
 @WebServlet(name = "EditLapServlet", urlPatterns = {"/EditLapServlet"})
 public class EditLapServlet extends HttpServlet {
