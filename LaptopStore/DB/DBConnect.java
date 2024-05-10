@@ -11,7 +11,7 @@ import java.sql.SQLException;
 
 /**
  *
- * @author wwwkr
+ * @author krishantha 
  */
 public class DBConnect {
     
