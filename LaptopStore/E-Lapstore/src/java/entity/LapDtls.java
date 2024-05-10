@@ -3,240 +3,82 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package DAO;
+package entity;
 
 /**
  *
  * @author wwwkr
  */
-public class LapDAOImpl implements LapDAO {
-
-    private Connection conn;
-
-    public LapDAOImpl(Connection conn) {
+public class LapDtls {
+    
+    private int lapid;
+    private String lapName;
+    private String price;
+    private String lapCategory;
+    private String status;
+    private String photoName;
+    private String email;
+    
+    public LapDtls(){
         super();
-        this.conn = conn;
     }
-
-    @Override
-    public boolean addLaps(LapDtls b) {
-
+    public LapDtls(String lapName,String price,String lapCategory,String status,String photoName,String email)
+    {
+        super();
+        this.lapName=lapName;
+        this.price=price;
+        this.lapCategory=lapCategory;
+        this.status=status;
+        this.photoName=photoName;
+        this.email=email;
     }
-
-    @Override
-    public List<LapDtls> getAllLaps() {
+    
+    public void setLapId(int lapid){
+        this.lapid=lapid;
     }
-
-    @Override
-    public LapDtls getLapById(int id) {
-
-        LapDtls b = null;
-        try {
-
-            String sql = "SELECT * FROM lap_dtls WHERE lapId=?";
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, id);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                b = new LapDtls();
-                b.setLapId(rs.getInt(1));
-                b.setLapName(rs.getString(2));
-                b.setPrice(rs.getString(3));
-                b.setLapCategory(rs.getString(4));
-                b.setStatus(rs.getString(5));
-                b.setPhotoName(rs.getString(6));
-                b.setEmail(rs.getString(7));
-
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return b;
+    public int getlapId(){
+        return lapid;
     }
-
-    @Override
-    public boolean updateEditLap(LapDtls b) {
-        boolean f = false;
-
-        try {
-
-            String sql = "UPDATE lap_dtls SET lapname=?,price=?,status=? WHERE lapId =?";
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, b.getLapName());
-            ps.setString(2, b.getPrice());
-            ps.setString(3, b.getStatus());
-            ps.setInt(4, b.getlapId());
-
-            int i = ps.executeUpdate();
-            if (i == 1) {
-                f = true;
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return f;
-
+    public void setLapName(String lapName){
+        this.lapName=lapName;
     }
-
-    @Override
-    public boolean deleteLaps(int id) {
-
-        boolean f = false;
-
-        try {
-
-            String sql = "DELETE FROM lap_dtls WHERE lapId =?";
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, id);
-            int i = ps.executeUpdate();
-            if (i == 1) {
-                f = true;
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return f;
+    public String getLapName(){
+        return lapName;
     }
-
-    @Override
-    public List<LapDtls> getNewLap() {
-        List<LapDtls> list = new ArrayList<LapDtls>();
-        LapDtls b = null;
-
-        try {
-
-            String sql = "SELECT * FROM lap_dtls WHERE lapCategory=? AND status=? ORDER BY lapId DESC";
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, "New");
-            ps.setString(2, "Active");
-            ResultSet rs = ps.executeQuery();
-            int i = 1;
-            while (rs.next() && i <= 4) {
-                b = new LapDtls();
-                b.setLapId(rs.getInt(1));
-                b.setLapName(rs.getString(2));
-                b.setPrice(rs.getString(3));
-                b.setLapCategory(rs.getString(4));
-                b.setStatus(rs.getString(5));
-                b.setPhotoName(rs.getString(6));
-                b.setEmail(rs.getString(7));
-                list.add(b);
-                i++;
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return list;
+    public void setPrice(String price){
+        this.price=price;
     }
-
-    @Override
-    public List<LapDtls> getRecentLap() {
-        List<LapDtls> list = new ArrayList<LapDtls>();
-        LapDtls b = null;
-
-        try {
-
-            String sql = "SELECT * FROM lap_dtls WHERE status=? ORDER BY lapId DESC";
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, "Active");
-
-            ResultSet rs = ps.executeQuery();
-            int i = 1;
-            while (rs.next() && i <= 4) {
-                b = new LapDtls();
-                b.setLapId(rs.getInt(1));
-                b.setLapName(rs.getString(2));
-                b.setPrice(rs.getString(3));
-                b.setLapCategory(rs.getString(4));
-                b.setStatus(rs.getString(5));
-                b.setPhotoName(rs.getString(6));
-                b.setEmail(rs.getString(7));
-                list.add(b);
-                i++;
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return list;
+    public String getPrice(){
+        return price;
     }
-
-    @Override
-    public List<LapDtls> getOldLaps() {
-
-        List<LapDtls> list = new ArrayList<LapDtls>();
-        LapDtls b = null;
-
-        try {
-
-            String sql = "SELECT * FROM lap_dtls WHERE lapCategory=? AND status=? ORDER BY lapId DESC";
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, "Old");
-            ps.setString(2, "Active");
-            ResultSet rs = ps.executeQuery();
-            int i = 1;
-            while (rs.next() && i <= 4) {
-                b = new LapDtls();
-                b.setLapId(rs.getInt(1));
-                b.setLapName(rs.getString(2));
-                b.setPrice(rs.getString(3));
-                b.setLapCategory(rs.getString(4));
-                b.setStatus(rs.getString(5));
-                b.setPhotoName(rs.getString(6));
-                b.setEmail(rs.getString(7));
-                list.add(b);
-                i++;
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return list;
-
+    public void setLapCategory(String lapCategory){
+        this.lapCategory=lapCategory;
     }
-
-    @Override
-    public List<LapDtls> getAllRecentLaps() {
-        List<LapDtls> list = new ArrayList<LapDtls>();
-        LapDtls b = null;
-
-        try {
-
-            String sql = "SELECT * FROM lap_dtls WHERE status=? ORDER BY lapId DESC";
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, "Active");
-
-            ResultSet rs = ps.executeQuery();
-
-            while (rs.next()) {
-                b = new LapDtls();
-                b.setLapId(rs.getInt(1));
-                b.setLapName(rs.getString(2));
-                b.setPrice(rs.getString(3));
-                b.setLapCategory(rs.getString(4));
-                b.setStatus(rs.getString(5));
-                b.setPhotoName(rs.getString(6));
-                b.setEmail(rs.getString(7));
-                list.add(b);
-
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return list;
+    public String getLapCategory(){
+        return lapCategory;
     }
-
-    @Override
-    public List<LapDtls> getAllNewLaps() {
+    public void setStatus(String status){
+        this.status=status;
     }
-
+    public String getStatus(){
+        return status;
+    }
+    public void setPhotoName(String photoName){
+        this.photoName=photoName;
+    }
+    public String getPhotoName(){
+        return photoName;
+    }
+    public void setEmail(String email){
+        this.email=email;
+    }
+    public String getEmail(){
+        return email;
+    }
+    
     @Override
-    public List<LapDtls> getAllOldLaps() {
-    }
-
+    public String toString(){
+        return "LapDtls [lapid="+lapid+",lapName="+lapName+",price="+price+",lapCategory="+lapCategory+",status="+status+",photoName="+photoName+",email="+email+"]";
+    }
+    
 }
