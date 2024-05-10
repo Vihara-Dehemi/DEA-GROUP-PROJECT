@@ -33,6 +33,50 @@ public class LapDtls {
         this.email=email;
     }
     
+    public void setLapId(int lapid){
+        this.lapid=lapid;
+    }
+    public int getlapId(){
+        return lapid;
+    }
+    public void setLapName(String lapName){
+        this.lapName=lapName;
+    }
+    public String getLapName(){
+        return lapName;
+    }
+    public void setPrice(String price){
+        this.price=price;
+    }
+    public String getPrice(){
+        return price;
+    }
+    public void setLapCategory(String lapCategory){
+        this.lapCategory=lapCategory;
+    }
+    public String getLapCategory(){
+        return lapCategory;
+    }
+    public void setStatus(String status){
+        this.status=status;
+    }
+    public String getStatus(){
+        return status;
+    }
+    public void setPhotoName(String photoName){
+        this.photoName=photoName;
+    }
+    public String getPhotoName(){
+        return photoName;
+    }
+    public void setEmail(String email){
+        this.email=email;
+    }
+    public String getEmail(){
+        return email;
+    }
+    
+    @Override
    
     
 }
